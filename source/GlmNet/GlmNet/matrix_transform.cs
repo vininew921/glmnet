@@ -229,6 +229,18 @@ namespace GlmNet
         }
 
         /// <summary>
+        /// Rotates a given vec3 around another vec3 by the desired angle
+        /// </summary>
+        /// <param name="v">The vec3 to be rotated</param>
+        /// <param name="angle">The angle to be rotated about</param>
+        /// <param name="normal">The vec3 to be rotated around by the given angle</param>
+        /// <returns></returns>
+        public static vec3 rotate(vec3 v, float angle, vec3 normal)
+        {
+            return rotate(angle, normal).to_mat3() * v;
+        }
+
+        /// <summary>
         /// Builds a rotation 4 * 4 matrix created from an axis vector and an angle.
         /// </summary>
         /// <param name="m">The m.</param>
@@ -263,7 +275,6 @@ namespace GlmNet
             result[3] = m[3];
             return result;
         }
-
 
         //  TODO: this is actually defined as an extension, put in the right file.
         public static mat4 rotate(float angle, vec3 v)

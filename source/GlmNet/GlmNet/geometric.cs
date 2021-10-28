@@ -30,6 +30,14 @@ namespace GlmNet
             return tmp.x + tmp.y + tmp.z;
         }
 
+        public static float angle(vec3 a, vec3 b)
+        {
+            vec3 normA = normalize(a);
+            vec3 normB = normalize(b);
+
+            return acos(dot(normA, normB));
+        }
+
         public static float dot(vec4 x, vec4 y)
         {
             vec4 tmp = new vec4(x * y);
