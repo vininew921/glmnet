@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GlmNet;
-using NUnit.Framework;
-
-namespace Tests
+﻿namespace Tests
 {
     /// <summary>
     /// General tests for all matrix types.
     /// </summary>
     [TestFixture]
     [Category("Rank 4 Matrices")]
-    class mat4Tests
+    internal class mat4Tests
     {
         [Test]
         public void MatrixIsColumnMajor()
@@ -88,8 +81,14 @@ namespace Tests
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    if (i == j) Assert.AreEqual(1f, identity1[i][j], "Diagonal elements not 1.0f");
-                    else Assert.AreEqual(0f, identity1[i][j], "Off-diagonal elements not 0.0f");
+                    if (i == j)
+                    {
+                        Assert.AreEqual(1f, identity1[i][j], "Diagonal elements not 1.0f");
+                    }
+                    else
+                    {
+                        Assert.AreEqual(0f, identity1[i][j], "Off-diagonal elements not 0.0f");
+                    }
                 }
             }
 
@@ -98,8 +97,14 @@ namespace Tests
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    if (i == j) Assert.AreEqual(1f, identity2[i][j], "Diagonal elements not 1.0f");
-                    else Assert.AreEqual(0f, identity2[i][j], "Off-diagonal elements not 0.0f");
+                    if (i == j)
+                    {
+                        Assert.AreEqual(1f, identity2[i][j], "Diagonal elements not 1.0f");
+                    }
+                    else
+                    {
+                        Assert.AreEqual(0f, identity2[i][j], "Off-diagonal elements not 0.0f");
+                    }
                 }
             }
         }

@@ -15,17 +15,41 @@ namespace GlmNet
         {
             get
             {
-                if (index == 0) return x;
-                else if (index == 1) return y;
-                else if (index == 2) return z;
-                else throw new Exception("Out of range.");
+                if (index == 0)
+                {
+                    return x;
+                }
+                else if (index == 1)
+                {
+                    return y;
+                }
+                else if (index == 2)
+                {
+                    return z;
+                }
+                else
+                {
+                    throw new Exception("Out of range.");
+                }
             }
             set
             {
-                if (index == 0) x = value;
-                else if (index == 1) y = value;
-                else if (index == 2) z = value;
-                else throw new Exception("Out of range.");
+                if (index == 0)
+                {
+                    x = value;
+                }
+                else if (index == 1)
+                {
+                    y = value;
+                }
+                else if (index == 2)
+                {
+                    z = value;
+                }
+                else
+                {
+                    throw new Exception("Out of range.");
+                }
             }
         }
 
@@ -43,22 +67,22 @@ namespace GlmNet
 
         public vec3(vec3 v)
         {
-            this.x = v.x;
-            this.y = v.y;
-            this.z = v.z;
+            x = v.x;
+            y = v.y;
+            z = v.z;
         }
 
         public vec3(vec4 v)
         {
-            this.x = v.x;
-            this.y = v.y;
-            this.z = v.z;
+            x = v.x;
+            y = v.y;
+            z = v.z;
         }
 
         public vec3(vec2 xy, float z)
         {
-            this.x = xy.x;
-            this.y = xy.y;
+            x = xy.x;
+            y = xy.y;
             this.z = z;
         }
 
@@ -101,28 +125,27 @@ namespace GlmNet
             return new vec3(rhs.x * lhs.x, rhs.y * lhs.y, rhs.z * lhs.z);
         }
 
-        public float[] to_array()
-        {
-            return new[] { x, y, z };
-        }
+        public float[] to_array() => new[] { x, y, z };
 
         #region Comparision
-        
+
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// The Difference is detected by the different values
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
             if (obj.GetType() == typeof(vec3))
             {
-                var vec = (vec3)obj;
-                if (this.x == vec.x && this.y == vec.y && this.z == vec.z)
+                vec3 vec = (vec3)obj;
+                if (x == vec.x && y == vec.y && z == vec.z)
+                {
                     return true;
+                }
             }
 
             return false;
@@ -159,20 +182,14 @@ namespace GlmNet
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.x.GetHashCode() ^ this.y.GetHashCode() ^ this.z.GetHashCode();
-        }
-        
+        public override int GetHashCode() => x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode();
+
         #endregion
 
         #region ToString support
-        
-        public override string ToString()
-        {
-            return String.Format("[{0}, {1}, {2}]", x, y, z);
-        }
-        
+
+        public override string ToString() => string.Format("[{0}, {1}, {2}]", x, y, z);
+
         #endregion
     }
 }

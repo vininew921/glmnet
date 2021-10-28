@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 
 namespace GlmNet
@@ -40,7 +39,7 @@ namespace GlmNet
 
         public mat2(vec2 a, vec2 b)
         {
-            this.cols = new[]
+            cols = new[]
             {
                 a, b
             };
@@ -48,7 +47,7 @@ namespace GlmNet
 
         public mat2(float a, float b, float c, float d)
         {
-            this.cols = new[]
+            cols = new[]
             {
                 new vec2(a,b), new vec2(c,d)
             };
@@ -84,8 +83,8 @@ namespace GlmNet
         /// <returns>The column at index <paramref name="column"/>.</returns>
         public vec2 this[int column]
         {
-            get { return cols[column]; }
-            set { cols[column] = value; }
+            get => cols[column];
+            set => cols[column] = value;
         }
 
         /// <summary>
@@ -101,8 +100,8 @@ namespace GlmNet
         /// </returns>
         public float this[int column, int row]
         {
-            get { return cols[column][row]; }
-            set { cols[column][row] = value; }
+            get => cols[column][row];
+            set => cols[column][row] = value;
         }
 
         #endregion
@@ -113,10 +112,7 @@ namespace GlmNet
         /// Returns the matrix as a flat array of elements, column major.
         /// </summary>
         /// <returns></returns>
-        public float[] to_array()
-        {
-            return cols.SelectMany(v => v.to_array()).ToArray();
-        }
+        public float[] to_array() => cols.SelectMany(v => v.to_array()).ToArray();
 
         #endregion
 
@@ -166,31 +162,33 @@ namespace GlmNet
 
         public override string ToString()
         {
-            return String.Format(
+            return string.Format(
                 "[{0}, {1}; {2}, {3}]",
                 this[0, 0], this[1, 0],
                 this[0, 1], this[1, 1]
             );
         }
-        
+
         #endregion
 
         #region comparision
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// The Difference is detected by the different values
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
             if (obj.GetType() == typeof(mat2))
             {
-                var mat = (mat2)obj;
+                mat2 mat = (mat2)obj;
                 if (mat[0] == this[0] && mat[1] == this[1])
+                {
                     return true;
+                }
             }
 
             return false;
@@ -227,11 +225,8 @@ namespace GlmNet
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this[0].GetHashCode() ^ this[1].GetHashCode();
-        }
-        
+        public override int GetHashCode() => this[0].GetHashCode() ^ this[1].GetHashCode();
+
         #endregion
 
         /// <summary>

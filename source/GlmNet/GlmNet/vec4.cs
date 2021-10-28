@@ -16,19 +16,49 @@ namespace GlmNet
         {
             get
             {
-                if (index == 0) return x;
-                else if (index == 1) return y;
-                else if (index == 2) return z;
-                else if (index == 3) return w;
-                else throw new Exception("Out of range.");
+                if (index == 0)
+                {
+                    return x;
+                }
+                else if (index == 1)
+                {
+                    return y;
+                }
+                else if (index == 2)
+                {
+                    return z;
+                }
+                else if (index == 3)
+                {
+                    return w;
+                }
+                else
+                {
+                    throw new Exception("Out of range.");
+                }
             }
             set
             {
-                if (index == 0) x = value;
-                else if (index == 1) y = value;
-                else if (index == 2) z = value;
-                else if (index == 3) w = value;
-                else throw new Exception("Out of range.");
+                if (index == 0)
+                {
+                    x = value;
+                }
+                else if (index == 1)
+                {
+                    y = value;
+                }
+                else if (index == 2)
+                {
+                    z = value;
+                }
+                else if (index == 3)
+                {
+                    w = value;
+                }
+                else
+                {
+                    throw new Exception("Out of range.");
+                }
             }
         }
 
@@ -47,17 +77,17 @@ namespace GlmNet
 
         public vec4(vec4 v)
         {
-            this.x = v.x;
-            this.y = v.y;
-            this.z = v.z;
-            this.w = v.w;
+            x = v.x;
+            y = v.y;
+            z = v.z;
+            w = v.w;
         }
 
         public vec4(vec3 xyz, float w)
         {
-            this.x = xyz.x;
-            this.y = xyz.y;
-            this.z = xyz.z;
+            x = xyz.x;
+            y = xyz.y;
+            z = xyz.z;
             this.w = w;
         }
 
@@ -101,28 +131,27 @@ namespace GlmNet
             return new vec4(lhs.x / rhs, lhs.y / rhs, lhs.z / rhs, lhs.w / rhs);
         }
 
-        public float[] to_array()
-        {
-            return new[] { x, y, z, w };
-        }
+        public float[] to_array() => new[] { x, y, z, w };
 
         #region Comparision
-            
+
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// The Difference is detected by the different values
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
             if (obj.GetType() == typeof(vec4))
             {
-                var vec = (vec4)obj;
-                if (this.x == vec.x && this.y == vec.y && this.z == vec.z && this.w == vec.w)
+                vec4 vec = (vec4)obj;
+                if (x == vec.x && y == vec.y && z == vec.z && w == vec.w)
+                {
                     return true;
+                }
             }
 
             return false;
@@ -159,20 +188,14 @@ namespace GlmNet
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.x.GetHashCode() ^ this.y.GetHashCode() ^ this.z.GetHashCode() ^ this.w.GetHashCode();
-        }
-        
+        public override int GetHashCode() => x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode() ^ w.GetHashCode();
+
         #endregion
 
         #region ToString support
-        
-        public override string ToString()
-        {
-            return String.Format("[{0}, {1}, {2}, {3}]", x, y, z, w);
-        }
-        
+
+        public override string ToString() => string.Format("[{0}, {1}, {2}, {3}]", x, y, z, w);
+
         #endregion
     }
 }

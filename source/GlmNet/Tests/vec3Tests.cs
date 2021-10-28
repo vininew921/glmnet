@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GlmNet;
-using NUnit.Framework;
-
-namespace Tests
+﻿namespace Tests
 {
     [TestFixture(Category = "Rank 2 Vectors")]
-    class vec3Tests
+    internal class vec3Tests
     {
         [Test]
         public void CanPerformVectorSubtraction()

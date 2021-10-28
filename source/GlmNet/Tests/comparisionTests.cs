@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GlmNet;
-using NUnit.Framework;
-
-namespace Tests
+﻿namespace Tests
 {
     /// <summary>
     /// General tests for all matrix types.
     /// </summary>
     [TestFixture]
     [Category("Rank 3 Matrices")]
-    class comparisionTests
+    internal class comparisionTests
     {
         [Test]
         public void CheckVectorReferenceEquality()

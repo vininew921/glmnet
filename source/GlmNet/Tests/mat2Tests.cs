@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GlmNet;
-using NUnit.Framework;
-
-namespace Tests
+﻿namespace Tests
 {
     /// <summary>
     /// General tests for all matrix types.
     /// </summary>
     [TestFixture]
     [Category("Rank 2 Matrices")]
-    class mat2Tests
+    internal class mat2Tests
     {
         [Test]
         public void MatrixIsColumnMajor()

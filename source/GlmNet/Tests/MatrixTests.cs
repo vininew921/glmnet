@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GlmNet;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-
-namespace Tests
+﻿namespace Tests
 {
     /// <summary>
     /// General tests for all matrix types.
     /// </summary>
     [TestFixture]
     [Category("Matrices")]
-    class matrixTests
+    internal class matrixTests
     {
         [Test]
         [Ignore("Blocked by bug #1.")]

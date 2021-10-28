@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace GlmNet
 {
@@ -20,7 +17,7 @@ namespace GlmNet
         /// <returns></returns>
         public static mat4 frustum(float left, float right, float bottom, float top, float nearVal, float farVal)
         {
-            var result = mat4.identity();
+            mat4 result = mat4.identity();
             result[0, 0] = (2.0f * nearVal) / (right - left);
             result[1, 1] = (2.0f * nearVal) / (top - bottom);
             result[2, 0] = (right + left) / (right - left);
@@ -48,7 +45,7 @@ namespace GlmNet
             float bottom = -range;
             float top = range;
 
-            var result = new mat4(0);
+            mat4 result = new mat4(0);
             result[0, 0] = ((2f) * zNear) / (right - left);
             result[1, 1] = ((2f) * zNear) / (top - bottom);
             result[2, 2] = -(1f);
@@ -98,7 +95,7 @@ namespace GlmNet
         /// <returns></returns>
         public static mat4 ortho(float left, float right, float bottom, float top, float zNear, float zFar)
         {
-            var result = mat4.identity();
+            mat4 result = mat4.identity();
             result[0, 0] = (2f) / (right - left);
             result[1, 1] = (2f) / (top - bottom);
             result[2, 2] = -(2f) / (zFar - zNear);
@@ -118,7 +115,7 @@ namespace GlmNet
         /// <returns></returns>
         public static mat4 ortho(float left, float right, float bottom, float top)
         {
-            var result = mat4.identity();
+            mat4 result = mat4.identity();
             result[0, 0] = (2f) / (right - left);
             result[1, 1] = (2f) / (top - bottom);
             result[2, 2] = -(1f);
@@ -137,9 +134,9 @@ namespace GlmNet
         /// <returns>A <see cref="mat4"/> that contains the projection matrix for the perspective transformation.</returns>
         public static mat4 perspective(float fovy, float aspect, float zNear, float zFar)
         {
-            var tanHalfFovy = (float)Math.Tan(fovy / 2.0f);
+            float tanHalfFovy = (float)Math.Tan(fovy / 2.0f);
 
-            var result = mat4.identity();
+            mat4 result = mat4.identity();
             result[0, 0] = 1.0f / (aspect * tanHalfFovy);
             result[1, 1] = 1.0f / (tanHalfFovy);
             result[2, 2] = -(zFar + zNear) / (zFar - zNear);
@@ -162,14 +159,16 @@ namespace GlmNet
         public static mat4 perspectiveFov(float fov, float width, float height, float zNear, float zFar)
         {
             if (width <= 0 || height <= 0 || fov <= 0)
+            {
                 throw new ArgumentOutOfRangeException();
+            }
 
-            var rad = fov;
+            float rad = fov;
 
-            var h = glm.cos((0.5f) * rad) / glm.sin((0.5f) * rad);
-            var w = h * height / width;
+            float h = glm.cos((0.5f) * rad) / glm.sin((0.5f) * rad);
+            float w = h * height / width;
 
-            var result = new mat4(0);
+            mat4 result = new mat4(0);
             result[0, 0] = w;
             result[1, 1] = h;
             result[2, 2] = -(zFar + zNear) / (zFar - zNear);
@@ -189,11 +188,16 @@ namespace GlmNet
         public static mat4 pickMatrix(vec2 center, vec2 delta, vec4 viewport)
         {
             if (delta.x <= 0 || delta.y <= 0)
+            {
                 throw new ArgumentOutOfRangeException();
-            var Result = new mat4(1.0f);
+            }
+
+            mat4 Result = new mat4(1.0f);
 
             if (!(delta.x > (0f) && delta.y > (0f)))
+            {
                 return Result; // Error
+            }
 
             vec3 Temp = new vec3(
                 ((viewport[2]) - (2f) * (center.x - (viewport[0]))) / delta.x,
@@ -235,10 +239,7 @@ namespace GlmNet
         /// <param name="angle">The angle to be rotated about</param>
         /// <param name="normal">The vec3 to be rotated around by the given angle</param>
         /// <returns></returns>
-        public static vec3 rotate(vec3 v, float angle, vec3 normal)
-        {
-            return rotate(angle, normal).to_mat3() * v;
-        }
+        public static vec3 rotate(vec3 v, float angle, vec3 normal) => rotate(angle, normal).to_mat3() * v;
 
         /// <summary>
         /// Builds a rotation 4 * 4 matrix created from an axis vector and an angle.
@@ -277,10 +278,7 @@ namespace GlmNet
         }
 
         //  TODO: this is actually defined as an extension, put in the right file.
-        public static mat4 rotate(float angle, vec3 v)
-        {
-            return rotate(mat4.identity(), angle, v);
-        }
+        public static mat4 rotate(float angle, vec3 v) => rotate(mat4.identity(), angle, v);
 
 
         /// <summary>

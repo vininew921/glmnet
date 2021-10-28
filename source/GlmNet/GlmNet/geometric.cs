@@ -1,6 +1,6 @@
 using System;
 
-namespace GlmNet 
+namespace GlmNet
 {
     /// <summary>
     /// The glm class contains static functions as exposed in the glm namespace of the 
@@ -63,5 +63,5 @@ namespace GlmNet
         }
     }
 
-// ReSharper restore InconsistentNaming
+    // ReSharper restore InconsistentNaming
 }

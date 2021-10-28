@@ -14,15 +14,33 @@ namespace GlmNet
         {
             get
             {
-                if (index == 0) return x;
-                else if (index == 1) return y;
-                else throw new Exception("Out of range.");
+                if (index == 0)
+                {
+                    return x;
+                }
+                else if (index == 1)
+                {
+                    return y;
+                }
+                else
+                {
+                    throw new Exception("Out of range.");
+                }
             }
             set
             {
-                if (index == 0) x = value;
-                else if (index == 1) y = value;
-                else throw new Exception("Out of range.");
+                if (index == 0)
+                {
+                    x = value;
+                }
+                else if (index == 1)
+                {
+                    y = value;
+                }
+                else
+                {
+                    throw new Exception("Out of range.");
+                }
             }
         }
 
@@ -39,14 +57,14 @@ namespace GlmNet
 
         public vec2(vec2 v)
         {
-            this.x = v.x;
-            this.y = v.y;
+            x = v.x;
+            y = v.y;
         }
 
         public vec2(vec3 v)
         {
-            this.x = v.x;
-            this.y = v.y;
+            x = v.x;
+            y = v.y;
         }
 
         public static vec2 operator +(vec2 lhs, vec2 rhs)
@@ -89,28 +107,27 @@ namespace GlmNet
             return new vec2(lhs.x / rhs, lhs.y / rhs);
         }
 
-        public float[] to_array()
-        {
-            return new[] { x, y };
-        }
+        public float[] to_array() => new[] { x, y };
 
         #region Comparision
-        
+
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// The Difference is detected by the different values
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
             if (obj.GetType() == typeof(vec2))
             {
-                var vec = (vec2)obj;
-                if (this.x == vec.x && this.y == vec.y)
+                vec2 vec = (vec2)obj;
+                if (x == vec.x && y == vec.y)
+                {
                     return true;
+                }
             }
 
             return false;
@@ -147,20 +164,14 @@ namespace GlmNet
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
-        {
-            return this.x.GetHashCode() ^ this.y.GetHashCode();
-        }
-        
+        public override int GetHashCode() => x.GetHashCode() ^ y.GetHashCode();
+
         #endregion
 
         #region ToString support
-            
-        public override string ToString()
-        {
-            return String.Format("[{0}, {1}]", x, y);
-        }
-        
+
+        public override string ToString() => string.Format("[{0}, {1}]", x, y);
+
         #endregion
     }
 }
