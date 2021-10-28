@@ -1,17 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlmNet", "GlmNet\GlmNet.csproj", "{3C5E3C3A-DB59-4DBC-A195-0427350ECB1C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{B36FA440-731F-44AB-92E4-781A5B187C13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlmNet", "GlmNet\GlmNet.csproj", "{3C5E3C3A-DB59-4DBC-A195-0427350ECB1C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2E8A05B3-281A-4205-81C2-CF190BF3413F}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{19380C6E-922A-4BBC-A085-35A6D6C910CC}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
 Global
@@ -34,18 +37,11 @@ Global
 		{3C5E3C3A-DB59-4DBC-A195-0427350ECB1C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{3C5E3C3A-DB59-4DBC-A195-0427350ECB1C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{3C5E3C3A-DB59-4DBC-A195-0427350ECB1C}.Release|Win32.ActiveCfg = Release|Any CPU
-		{B36FA440-731F-44AB-92E4-781A5B187C13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B36FA440-731F-44AB-92E4-781A5B187C13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B36FA440-731F-44AB-92E4-781A5B187C13}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B36FA440-731F-44AB-92E4-781A5B187C13}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B36FA440-731F-44AB-92E4-781A5B187C13}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{B36FA440-731F-44AB-92E4-781A5B187C13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B36FA440-731F-44AB-92E4-781A5B187C13}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B36FA440-731F-44AB-92E4-781A5B187C13}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B36FA440-731F-44AB-92E4-781A5B187C13}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B36FA440-731F-44AB-92E4-781A5B187C13}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9BF8A50B-4A6A-44C9-B1E6-DB8EFB9740CA}
 	EndGlobalSection
 EndGlobal

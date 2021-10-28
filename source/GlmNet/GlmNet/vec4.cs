@@ -14,29 +14,7 @@ namespace GlmNet
 
         public float this[int index]
         {
-            get
-            {
-                if (index == 0)
-                {
-                    return x;
-                }
-                else if (index == 1)
-                {
-                    return y;
-                }
-                else if (index == 2)
-                {
-                    return z;
-                }
-                else if (index == 3)
-                {
-                    return w;
-                }
-                else
-                {
-                    throw new Exception("Out of range.");
-                }
-            }
+            get => index == 0 ? x : index == 1 ? y : index == 2 ? z : index == 3 ? w : throw new Exception("Out of range.");
             set
             {
                 if (index == 0)
@@ -51,13 +29,9 @@ namespace GlmNet
                 {
                     z = value;
                 }
-                else if (index == 3)
-                {
-                    w = value;
-                }
                 else
                 {
-                    throw new Exception("Out of range.");
+                    w = index == 3 ? value : throw new Exception("Out of range.");
                 }
             }
         }

@@ -18,8 +18,8 @@ namespace GlmNet
         public static mat4 frustum(float left, float right, float bottom, float top, float nearVal, float farVal)
         {
             mat4 result = mat4.identity();
-            result[0, 0] = (2.0f * nearVal) / (right - left);
-            result[1, 1] = (2.0f * nearVal) / (top - bottom);
+            result[0, 0] = 2.0f * nearVal / (right - left);
+            result[1, 1] = 2.0f * nearVal / (top - bottom);
             result[2, 0] = (right + left) / (right - left);
             result[2, 1] = (top + bottom) / (top - bottom);
             result[2, 2] = -(farVal + nearVal) / (farVal - nearVal);
@@ -38,7 +38,7 @@ namespace GlmNet
         public static mat4 infinitePerspective(float fovy, float aspect, float zNear)
         {
 
-            float range = tan(fovy / (2f)) * zNear;
+            float range = tan(fovy / 2f) * zNear;
 
             float left = -range * aspect;
             float right = range * aspect;
@@ -46,8 +46,8 @@ namespace GlmNet
             float top = range;
 
             mat4 result = new mat4(0);
-            result[0, 0] = ((2f) * zNear) / (right - left);
-            result[1, 1] = ((2f) * zNear) / (top - bottom);
+            result[0, 0] = 2f * zNear / (right - left);
+            result[1, 1] = 2f * zNear / (top - bottom);
             result[2, 2] = -(1f);
             result[2, 3] = -(1f);
             result[3, 2] = -(2f) * zNear;
@@ -96,8 +96,8 @@ namespace GlmNet
         public static mat4 ortho(float left, float right, float bottom, float top, float zNear, float zFar)
         {
             mat4 result = mat4.identity();
-            result[0, 0] = (2f) / (right - left);
-            result[1, 1] = (2f) / (top - bottom);
+            result[0, 0] = 2f / (right - left);
+            result[1, 1] = 2f / (top - bottom);
             result[2, 2] = -(2f) / (zFar - zNear);
             result[3, 0] = -(right + left) / (right - left);
             result[3, 1] = -(top + bottom) / (top - bottom);
@@ -116,8 +116,8 @@ namespace GlmNet
         public static mat4 ortho(float left, float right, float bottom, float top)
         {
             mat4 result = mat4.identity();
-            result[0, 0] = (2f) / (right - left);
-            result[1, 1] = (2f) / (top - bottom);
+            result[0, 0] = 2f / (right - left);
+            result[1, 1] = 2f / (top - bottom);
             result[2, 2] = -(1f);
             result[3, 0] = -(right + left) / (right - left);
             result[3, 1] = -(top + bottom) / (top - bottom);
@@ -138,7 +138,7 @@ namespace GlmNet
 
             mat4 result = mat4.identity();
             result[0, 0] = 1.0f / (aspect * tanHalfFovy);
-            result[1, 1] = 1.0f / (tanHalfFovy);
+            result[1, 1] = 1.0f / tanHalfFovy;
             result[2, 2] = -(zFar + zNear) / (zFar - zNear);
             result[2, 3] = -1.0f;
             result[3, 2] = -(2.0f * zFar * zNear) / (zFar - zNear);
@@ -165,7 +165,7 @@ namespace GlmNet
 
             float rad = fov;
 
-            float h = glm.cos((0.5f) * rad) / glm.sin((0.5f) * rad);
+            float h = cos(0.5f * rad) / sin(0.5f * rad);
             float w = h * height / width;
 
             mat4 result = new mat4(0);
@@ -173,7 +173,7 @@ namespace GlmNet
             result[1, 1] = h;
             result[2, 2] = -(zFar + zNear) / (zFar - zNear);
             result[2, 3] = -(1f);
-            result[3, 2] = -((2f) * zFar * zNear) / (zFar - zNear);
+            result[3, 2] = -(2f * zFar * zNear) / (zFar - zNear);
             return result;
         }
 
@@ -194,19 +194,19 @@ namespace GlmNet
 
             mat4 Result = new mat4(1.0f);
 
-            if (!(delta.x > (0f) && delta.y > (0f)))
+            if (!(delta.x > 0f && delta.y > 0f))
             {
                 return Result; // Error
             }
 
             vec3 Temp = new vec3(
-                ((viewport[2]) - (2f) * (center.x - (viewport[0]))) / delta.x,
-                ((viewport[3]) - (2f) * (center.y - (viewport[1]))) / delta.y,
+                (viewport[2] - (2f * (center.x - viewport[0]))) / delta.x,
+                (viewport[3] - (2f * (center.y - viewport[1]))) / delta.y,
                 (0f));
 
             // Translate and scale the picked region to the entire window
             Result = translate(Result, Temp);
-            return scale(Result, new vec3((viewport[2]) / delta.x, (viewport[3]) / delta.y, (1)));
+            return scale(Result, new vec3(viewport[2] / delta.x, viewport[3] / delta.y, (1)));
         }
 
         /// <summary>
@@ -225,9 +225,9 @@ namespace GlmNet
             tmp = proj * tmp;
 
             tmp /= tmp.w;
-            tmp = tmp * 0.5f + 0.5f;
-            tmp[0] = tmp[0] * viewport[2] + viewport[0];
-            tmp[1] = tmp[1] * viewport[3] + viewport[1];
+            tmp = (tmp * 0.5f) + 0.5f;
+            tmp[0] = (tmp[0] * viewport[2]) + viewport[0];
+            tmp[1] = (tmp[1] * viewport[3]) + viewport[1];
 
             return new vec3(tmp.x, tmp.y, tmp.z);
         }
@@ -257,29 +257,28 @@ namespace GlmNet
             vec3 temp = (1.0f - c) * axis;
 
             mat4 rotate = mat4.identity();
-            rotate[0, 0] = c + temp[0] * axis[0];
-            rotate[0, 1] = 0 + temp[0] * axis[1] + s * axis[2];
-            rotate[0, 2] = 0 + temp[0] * axis[2] - s * axis[1];
+            rotate[0, 0] = c + (temp[0] * axis[0]);
+            rotate[0, 1] = 0 + (temp[0] * axis[1]) + (s * axis[2]);
+            rotate[0, 2] = 0 + (temp[0] * axis[2]) - (s * axis[1]);
 
-            rotate[1, 0] = 0 + temp[1] * axis[0] - s * axis[2];
-            rotate[1, 1] = c + temp[1] * axis[1];
-            rotate[1, 2] = 0 + temp[1] * axis[2] + s * axis[0];
+            rotate[1, 0] = 0 + (temp[1] * axis[0]) - (s * axis[2]);
+            rotate[1, 1] = c + (temp[1] * axis[1]);
+            rotate[1, 2] = 0 + (temp[1] * axis[2]) + (s * axis[0]);
 
-            rotate[2, 0] = 0 + temp[2] * axis[0] + s * axis[1];
-            rotate[2, 1] = 0 + temp[2] * axis[1] - s * axis[0];
-            rotate[2, 2] = c + temp[2] * axis[2];
+            rotate[2, 0] = 0 + (temp[2] * axis[0]) + (s * axis[1]);
+            rotate[2, 1] = 0 + (temp[2] * axis[1]) - (s * axis[0]);
+            rotate[2, 2] = c + (temp[2] * axis[2]);
 
             mat4 result = mat4.identity();
-            result[0] = m[0] * rotate[0][0] + m[1] * rotate[0][1] + m[2] * rotate[0][2];
-            result[1] = m[0] * rotate[1][0] + m[1] * rotate[1][1] + m[2] * rotate[1][2];
-            result[2] = m[0] * rotate[2][0] + m[1] * rotate[2][1] + m[2] * rotate[2][2];
+            result[0] = (m[0] * rotate[0][0]) + (m[1] * rotate[0][1]) + (m[2] * rotate[0][2]);
+            result[1] = (m[0] * rotate[1][0]) + (m[1] * rotate[1][1]) + (m[2] * rotate[1][2]);
+            result[2] = (m[0] * rotate[2][0]) + (m[1] * rotate[2][1]) + (m[2] * rotate[2][2]);
             result[3] = m[3];
             return result;
         }
 
         //  TODO: this is actually defined as an extension, put in the right file.
         public static mat4 rotate(float angle, vec3 v) => rotate(mat4.identity(), angle, v);
-
 
         /// <summary>
         /// Applies a scale transformation to matrix <paramref name="m"/> by vector <paramref name="v"/>.
@@ -306,7 +305,7 @@ namespace GlmNet
         public static mat4 translate(mat4 m, vec3 v)
         {
             mat4 result = m;
-            result[3] = m[0] * v[0] + m[1] * v[1] + m[2] * v[2] + m[3];
+            result[3] = (m[0] * v[0]) + (m[1] * v[1]) + (m[2] * v[2]) + m[3];
             return result;
         }
 
@@ -320,18 +319,18 @@ namespace GlmNet
         /// <returns></returns>
         public static mat4 tweakedInfinitePerspective(float fovy, float aspect, float zNear)
         {
-            float range = tan(fovy / (2)) * zNear;
+            float range = tan(fovy / 2) * zNear;
             float left = -range * aspect;
             float right = range * aspect;
             float bottom = -range;
             float top = range;
 
             mat4 Result = new mat4((0f));
-            Result[0, 0] = ((2) * zNear) / (right - left);
-            Result[1, 1] = ((2) * zNear) / (top - bottom);
-            Result[2, 2] = (0.0001f) - (1f);
+            Result[0, 0] = 2 * zNear / (right - left);
+            Result[1, 1] = 2 * zNear / (top - bottom);
+            Result[2, 2] = 0.0001f - 1f;
             Result[2, 3] = (-1);
-            Result[3, 2] = -((0.0001f) - (2)) * zNear;
+            Result[3, 2] = -(0.0001f - 2) * zNear;
             return Result;
         }
 
@@ -345,12 +344,12 @@ namespace GlmNet
         /// <returns></returns>
         public static vec3 unProject(vec3 win, mat4 model, mat4 proj, vec4 viewport)
         {
-            mat4 Inverse = glm.inverse(proj * model);
+            mat4 Inverse = inverse(proj * model);
 
             vec4 tmp = new vec4(win, (1f));
-            tmp.x = (tmp.x - (viewport[0])) / (viewport[2]);
-            tmp.y = (tmp.y - (viewport[1])) / (viewport[3]);
-            tmp = tmp * (2f) - (1f);
+            tmp.x = (tmp.x - viewport[0]) / viewport[2];
+            tmp.y = (tmp.y - viewport[1]) / viewport[3];
+            tmp = (tmp * 2f) - 1f;
 
             vec4 obj = Inverse * tmp;
             obj /= obj.w;
@@ -358,5 +357,4 @@ namespace GlmNet
             return new vec3(obj);
         }
     }
-    // ReSharper restore InconsistentNaming
 }

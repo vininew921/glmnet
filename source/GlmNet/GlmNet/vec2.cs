@@ -12,34 +12,16 @@ namespace GlmNet
 
         public float this[int index]
         {
-            get
-            {
-                if (index == 0)
-                {
-                    return x;
-                }
-                else if (index == 1)
-                {
-                    return y;
-                }
-                else
-                {
-                    throw new Exception("Out of range.");
-                }
-            }
+            get => index == 0 ? x : index == 1 ? y : throw new Exception("Out of range.");
             set
             {
                 if (index == 0)
                 {
                     x = value;
                 }
-                else if (index == 1)
-                {
-                    y = value;
-                }
                 else
                 {
-                    throw new Exception("Out of range.");
+                    y = index == 1 ? value : throw new Exception("Out of range.");
                 }
             }
         }

@@ -16,7 +16,7 @@ namespace GlmNet
         /// <param name="scale">The scale.</param>
         public mat3(float scale)
         {
-            cols = new[]
+            _cols = new[]
             {
                 new vec3(scale, 0.0f, 0.0f),
                 new vec3(0.0f, scale, 0.0f),
@@ -31,7 +31,7 @@ namespace GlmNet
         /// <param name="cols">The colums of the matrix.</param>
         public mat3(vec3[] cols)
         {
-            this.cols = new[]
+            this._cols = new[]
             {
                 cols[0],
                 cols[1],
@@ -41,7 +41,7 @@ namespace GlmNet
 
         public mat3(vec3 a, vec3 b, vec3 c)
         {
-            cols = new[]
+            _cols = new[]
             {
                 a, b, c
             };
@@ -55,7 +55,7 @@ namespace GlmNet
         {
             return new mat3
             {
-                cols = new[]
+                _cols = new[]
                 {
                     new vec3(1,0,0),
                     new vec3(0,1,0),
@@ -78,8 +78,8 @@ namespace GlmNet
         /// <returns>The column at index <paramref name="column"/>.</returns>
         public vec3 this[int column]
         {
-            get => cols[column];
-            set => cols[column] = value;
+            get => _cols[column];
+            set => _cols[column] = value;
         }
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace GlmNet
         /// </returns>
         public float this[int column, int row]
         {
-            get => cols[column][row];
-            set => cols[column][row] = value;
+            get => _cols[column][row];
+            set => _cols[column][row] = value;
         }
 
         #endregion
@@ -107,7 +107,7 @@ namespace GlmNet
         /// Returns the matrix as a flat array of elements, column major.
         /// </summary>
         /// <returns></returns>
-        public float[] to_array() => cols.SelectMany(v => v.to_array()).ToArray();
+        public float[] to_array() => _cols.SelectMany(v => v.to_array()).ToArray();
 
         /// <summary>
         /// Returns the <see cref="mat3"/> portion of this matrix.
@@ -116,8 +116,8 @@ namespace GlmNet
         public mat2 to_mat2()
         {
             return new mat2(new[] {
-      new vec2(cols[0][0], cols[0][1]),
-      new vec2(cols[1][0], cols[1][1])});
+      new vec2(_cols[0][0], _cols[0][1]),
+      new vec2(_cols[1][0], _cols[1][1])});
         }
 
         #endregion
@@ -133,9 +133,9 @@ namespace GlmNet
         public static vec3 operator *(mat3 lhs, vec3 rhs)
         {
             return new vec3(
-                lhs[0, 0] * rhs[0] + lhs[1, 0] * rhs[1] + lhs[2, 0] * rhs[2],
-                lhs[0, 1] * rhs[0] + lhs[1, 1] * rhs[1] + lhs[2, 1] * rhs[2],
-                lhs[0, 2] * rhs[0] + lhs[1, 2] * rhs[1] + lhs[2, 2] * rhs[2]
+                (lhs[0, 0] * rhs[0]) + (lhs[1, 0] * rhs[1]) + (lhs[2, 0] * rhs[2]),
+                (lhs[0, 1] * rhs[0]) + (lhs[1, 1] * rhs[1]) + (lhs[2, 1] * rhs[2]),
+                (lhs[0, 2] * rhs[0]) + (lhs[1, 2] * rhs[1]) + (lhs[2, 2] * rhs[2])
             );
         }
 
@@ -149,9 +149,9 @@ namespace GlmNet
         {
             return new mat3(new[]
             {
-          lhs[0][0] * rhs[0] + lhs[1][0] * rhs[1] + lhs[2][0] * rhs[2],
-          lhs[0][1] * rhs[0] + lhs[1][1] * rhs[1] + lhs[2][1] * rhs[2],
-          lhs[0][2] * rhs[0] + lhs[1][2] * rhs[1] + lhs[2][2] * rhs[2]
+          (lhs[0][0] * rhs[0]) +(lhs[1][0] * rhs[1]) + (lhs[2][0] * rhs[2]),
+          (lhs[0][1] * rhs[0]) +(lhs[1][1] * rhs[1]) + (lhs[2][1] * rhs[2]),
+          (lhs[0][2] * rhs[0]) +(lhs[1][2] * rhs[1]) + (lhs[2][2] * rhs[2])
             });
         }
 
@@ -240,6 +240,6 @@ namespace GlmNet
         /// <summary>
         /// The columms of the matrix.
         /// </summary>
-        private vec3[] cols;
+        private vec3[] _cols;
     }
 }

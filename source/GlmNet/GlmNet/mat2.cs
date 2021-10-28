@@ -16,7 +16,7 @@ namespace GlmNet
         /// <param name="scale">The scale.</param>
         public mat2(float scale)
         {
-            cols = new[]
+            _cols = new[]
             {
                 new vec2(scale, 0.0f),
                 new vec2(0.0f, scale)
@@ -30,7 +30,7 @@ namespace GlmNet
         /// <param name="cols">The colums of the matrix.</param>
         public mat2(vec2[] cols)
         {
-            this.cols = new[]
+            this._cols = new[]
             {
                 cols[0],
                 cols[1]
@@ -39,7 +39,7 @@ namespace GlmNet
 
         public mat2(vec2 a, vec2 b)
         {
-            cols = new[]
+            _cols = new[]
             {
                 a, b
             };
@@ -47,7 +47,7 @@ namespace GlmNet
 
         public mat2(float a, float b, float c, float d)
         {
-            cols = new[]
+            _cols = new[]
             {
                 new vec2(a,b), new vec2(c,d)
             };
@@ -61,7 +61,7 @@ namespace GlmNet
         {
             return new mat2
             {
-                cols = new[]
+                _cols = new[]
                 {
                     new vec2(1,0),
                     new vec2(0,1)
@@ -83,8 +83,8 @@ namespace GlmNet
         /// <returns>The column at index <paramref name="column"/>.</returns>
         public vec2 this[int column]
         {
-            get => cols[column];
-            set => cols[column] = value;
+            get => _cols[column];
+            set => _cols[column] = value;
         }
 
         /// <summary>
@@ -100,8 +100,8 @@ namespace GlmNet
         /// </returns>
         public float this[int column, int row]
         {
-            get => cols[column][row];
-            set => cols[column][row] = value;
+            get => _cols[column][row];
+            set => _cols[column][row] = value;
         }
 
         #endregion
@@ -112,7 +112,7 @@ namespace GlmNet
         /// Returns the matrix as a flat array of elements, column major.
         /// </summary>
         /// <returns></returns>
-        public float[] to_array() => cols.SelectMany(v => v.to_array()).ToArray();
+        public float[] to_array() => _cols.SelectMany(v => v.to_array()).ToArray();
 
         #endregion
 
@@ -127,8 +127,8 @@ namespace GlmNet
         public static vec2 operator *(mat2 lhs, vec2 rhs)
         {
             return new vec2(
-                lhs[0, 0] * rhs[0] + lhs[1, 0] * rhs[1],
-                lhs[0, 1] * rhs[0] + lhs[1, 1] * rhs[1]
+                (lhs[0, 0] * rhs[0]) + (lhs[1, 0] * rhs[1]),
+                (lhs[0, 1] * rhs[0]) + (lhs[1, 1] * rhs[1])
             );
         }
 
@@ -142,8 +142,8 @@ namespace GlmNet
         {
             return new mat2(new[]
             {
-          lhs[0][0] * rhs[0] + lhs[1][0] * rhs[1],
-          lhs[0][1] * rhs[0] + lhs[1][1] * rhs[1]
+              (lhs[0][0] * rhs[0]) + (lhs[1][0] * rhs[1]),
+              (lhs[0][1] * rhs[0]) + (lhs[1][1] * rhs[1])
             });
         }
 
@@ -232,6 +232,6 @@ namespace GlmNet
         /// <summary>
         /// The columms of the matrix.
         /// </summary>
-        private vec2[] cols;
+        private vec2[] _cols;
     }
 }
