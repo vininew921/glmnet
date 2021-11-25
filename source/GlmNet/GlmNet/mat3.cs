@@ -31,7 +31,7 @@ namespace GlmNet
         /// <param name="cols">The colums of the matrix.</param>
         public mat3(vec3[] cols)
         {
-            this._cols = new[]
+            _cols = new[]
             {
                 cols[0],
                 cols[1],
